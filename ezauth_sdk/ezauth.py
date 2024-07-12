@@ -28,6 +28,8 @@ class EZAuth:
 
         self.register_temp_email = None
 
+        self.confirm_pending = False
+
     def __login_usr(self, r: requests.Response):
         # User Created and logged in
         logging.info("User Created and Logged In")
@@ -73,10 +75,14 @@ class EZAuth:
         else:
             raise Exception(r.json()["detail"])
 
-    def login(self, credential: str, password: str):
+    def login(self, credential: str, password: str, two_factor: str = None):
         r = requests.post(
             f"{self.base_url}/login",
-            json={"identifier": credential, "password": password},
+            json={
+                "identifier": credential,
+                "password": password,
+                "two_factor_code": two_factor,
+            },
         )
         if r.status_code == 200:
             logging.info("Logged In")
@@ -84,6 +90,8 @@ class EZAuth:
             self.expires = datetime.datetime.now() + datetime.timedelta(
                 seconds=r.json()["expires"]
             )
+        else:
+            raise Exception(r.json()["detail"])
 
     def _request(self, method: str, path: str, data: dict = None):
         if self.session_token is None:
@@ -108,3 +116,41 @@ class EZAuth:
 
     def logout(self) -> bool:
         return self._request("get", "/logout").status_code == 204
+
+    def update_profile(self, data: dict) -> dict:
+        return self._request("patch", "/profile", data).json()
+
+    def reset_password(self, old_password: str, new_password: str):
+        r = self._request(
+            "post",
+            "/profile/reset-password",
+            {"password": new_password, "old_password": old_password},
+        )
+        if r.status_code == 204:
+            logging.info("Password Change Pending (Check Email)")
+            self.confirm_pending = True
+        elif r.status_code == 200:
+            logging.info("Password Changed")
+        else:
+            raise Exception(r.json()["detail"])
+
+    def confirm_reset_password(self, token: str):
+        r = self._request("post", "/profile/confirm-password", {"code": token})
+        if r.status_code == 204:
+            logging.info("Password Changed")
+        else:
+            raise Exception(r.json()["detail"])
+
+    def enable_2fa(self) -> dict:
+        r = self._request("post", "/2fa/enable")
+        if r.status_code == 200:
+            return r.json()
+        else:
+            raise Exception(r.json()["detail"])
+
+    def confirm_2fa_enable(self, token: str):
+        r = self._request("post", "/2fa/confirm-enable", {"code": token})
+        if r.status_code == 204:
+            logging.info("2FA Enabled")
+        else:
+            raise Exception(r.json()["detail"])
