@@ -1,26 +1,42 @@
 export class EZAuthClient {
     server_url: string;
+    profile_info: JSON | null = null;
 
     constructor(server_url: string) {
         this.server_url = server_url.replace(/\/$/, '');
         console.log('EZAuth initialized');
     }
 
-    async health(): Promise<boolean> {
-        try {
-            const response = await fetch(`${this.server_url}/up`);
-            return response.ok;
-        } catch (error) {
-            return false;
+    async logout(): Promise<undefined> {
+        const response = await fetch(`${this.server_url}/logout`, {
+            credentials: "include"
+        });
+        if (response.status === 200) {
+            console.info("Logged Out");
+        } else {
+            const errorDetail = await response.json();
+            throw errorDetail;
         }
     }
 
-    async checkLoggedIn(): Promise<boolean> {
+    async init(): Promise<boolean> {
+        try {
+            const response = await fetch(`${this.server_url}/up`);
+            if (!response.ok) {
+                return false;
+            }
+        } catch (error) {
+            return false;
+        }
         try {
             const response = await fetch(`${this.server_url}/profile`, {
                 credentials: "include"
             });
-            return response.ok;
+            if (!response.ok) {
+                return false;
+            }
+            this.profile_info = await response.json();
+            return await response.json();
         } catch (error) {
             return false;
         }
