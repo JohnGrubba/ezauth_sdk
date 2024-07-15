@@ -1,1 +1,2 @@
-export { EZAuthClient } from "./EZAuthClient"
+export { EZAuthClient } from "./EZAuthJSAdapter"
+export { EZAuthServerAdapter } from "./EZAuthServerAdapter"

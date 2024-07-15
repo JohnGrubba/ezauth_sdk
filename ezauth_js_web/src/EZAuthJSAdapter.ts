@@ -19,26 +19,26 @@ export class EZAuthClient {
         }
     }
 
-    async init(): Promise<boolean> {
+    async init(): Promise<JSON | undefined> {
         try {
             const response = await fetch(`${this.server_url}/up`);
             if (!response.ok) {
-                return false;
+                return;
             }
         } catch (error) {
-            return false;
+            return;
         }
         try {
             const response = await fetch(`${this.server_url}/profile`, {
                 credentials: "include"
             });
             if (!response.ok) {
-                return false;
+                return;
             }
             this.profile_info = await response.json();
-            return await response.json();
+            return this.profile_info;
         } catch (error) {
-            return false;
+            return;
         }
     }
 
@@ -80,6 +80,7 @@ export class EZAuthClient {
         })
         if (response.status === 200) {
             console.info("Logged In");
+            return (await response.json())["session_token"]
         }
         else {
             const errorDetail = await response.json();

@@ -1,9 +1,14 @@
 {
   "version": "1.0.0",
-  "description": "My webpack project",
-  "name": "my-webpack-project",
-  "main": "dist/EZAuth.js",
+  "description": "EZAuthJSAdapter",
+  "name": "ezauth-js-adapter",
   "module": "src/index.ts",
+  "main": "dist/EZAuthJSAdapter.js",
+  "typings": "dist/@types/EZAuthJSAdapter.d.ts",
+  "author": "JJTV",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",

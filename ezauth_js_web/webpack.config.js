@@ -9,8 +9,8 @@ const config = {
     entry: './src/index.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: "ezauth.js",
-        library: "ezauth",
+        filename: "EZAuthJSAdapter.js",
+        library: "EZAuthJSAdapter",
         libraryTarget: "umd"
     },
     plugins: [
