@@ -1,0 +1,1 @@
+export { EZAuthClient } from "./EZAuthJSAdapter"

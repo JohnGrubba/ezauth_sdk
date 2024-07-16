@@ -6,11 +6,11 @@ const isProduction = process.env.NODE_ENV == 'production'
 
 
 const config = {
-    entry: './src/index.ts',
+    entry: './src/ezauth-js-adapter.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: "EZAuthJSAdapter.js",
-        library: "EZAuthJSAdapter",
+        filename: "ezauth-js-adapter.js",
+        library: "ezauth-js-adapter",
         libraryTarget: "umd"
     },
     plugins: [

@@ -2,9 +2,9 @@
   "version": "1.0.0",
   "description": "EZAuthJSAdapter",
   "name": "ezauth-js-adapter",
-  "module": "src/index.ts",
-  "main": "dist/EZAuthJSAdapter.js",
-  "typings": "dist/@types/EZAuthJSAdapter.d.ts",
+  "module": "src/ezauth-js-adapter.ts",
+  "main": "dist/ezauth-js-adapter.js",
+  "typings": "dist/@types/ezauth-js-adapter.d.ts",
   "author": "JJTV",
   "files": [
     "dist"
