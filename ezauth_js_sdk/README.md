@@ -8,7 +8,7 @@ It works in Frameworks like `React`, `NextJS`, or in plain `HTML` and `Javascrip
 For Plain HTML and Javascript, you can include our bundle in your HTML file:
 
 ```html
-<script src="https://raw.githubusercontent.com/JohnGrubba/ezauth_skd/master/ezauth_js_web/dist/ezauth-js-adapter.js"></script>
+<script src="https://raw.githubusercontent.com/JohnGrubba/ezauth_sdk/master/ezauth_js_sdk/dist/ezauth-js-adapter.js"></script>
 ```
 
 You can then initialize the SDK by calling the `EZAuth` object:
