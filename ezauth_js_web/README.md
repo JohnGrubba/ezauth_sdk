@@ -1,15 +1,22 @@
-# 🚀 Welcome to your new awesome project!
+# Javascript EZAuth SDK
 
-This project has been created using **webpack-cli**, you can now run
+The Javascript EZAuth SDK is a library that allows you to easily integrate EZAuth into your Javascript application.
+It works in Frameworks like `React`, `NextJS`, or in plain `HTML` and `Javascript` by including our bundle.
 
+## Installation
+
+For Plain HTML and Javascript, you can include our bundle in your HTML file:
+
+```html
+<script src="https://raw.githubusercontent.com/JohnGrubba/ezauth_skd/master/ezauth_js_web/dist/ezauth-js-adapter.js"></script>
 ```
-npm run build
-```
 
-or
+You can then initialize the SDK by calling the `EZAuth` object:
 
-```
-yarn build
-```
+```javascript
+const ezauth = new window["ezauth-js-adapter"].EZAuthClient('http://localhost:3250/')
 
-to bundle your application
+ezauth.init().then(() => {
+    console.log('EZAuth Initialized')
+})
+```
