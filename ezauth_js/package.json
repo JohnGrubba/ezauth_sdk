@@ -1,0 +1,27 @@
+{
+  "name": "ezauth_sdk",
+  "description": "Client SDK for EZAuth",
+  "author": "JohnGrubba",
+  "license": "ISC",
+  "version": "0.0.2",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/JohnGrubba/ezauth_sdk",
+  "repository": {
+    "url": "https://github.com/JohnGrubba/ezauth_sdk"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [
+    "authentication",
+    "ezauth",
+    "email",
+    "ezauth-js"
+  ],
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3"
+  }
+}
